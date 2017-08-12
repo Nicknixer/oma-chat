@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 let index = require('./routes/index');
 let messages = require('./routes/messages');
 let db = require('./dependency/database.js');
-
+let session = require('express-session');
+let config = require('./config');
 var app = express();
 app.locals.db = db;
 
@@ -22,6 +23,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('trust proxy', 1)
+app.use(session({
+  secret: config.session.secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 app.use('/', index);
 //app.use('/messages', messages);
