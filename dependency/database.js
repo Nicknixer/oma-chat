@@ -1,15 +1,10 @@
-let mysql = require('mysql');
-let config = require('../config.json');
+let mysql = require('mysql'),
+    config = require('../config.json');
 
-let dbParams = config.database;
+let db = mysql.createConnection(config.database);
 
-let db = mysql.createConnection({
-  host     : dbParams.host,
-  user     : dbParams.user,
-  password : dbParams.password,
-  database : dbParams.database
+db.connect((error) => {
+    if (error) throw error;
 });
-
-db.connect();
 
 module.exports = db;
