@@ -3,9 +3,12 @@
 		"host": "localhost",
 		"user": "root",
 		"password": "",
-		"database": ""
+		"database": "oma-chat"
 	},
 	"session": {
 		"secret": "JsajjWLp23mdwewefewWEr3444"
+	},
+	"server": {
+		"port": 3001
 	}
 }
