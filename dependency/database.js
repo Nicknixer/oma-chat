@@ -3,7 +3,7 @@ let mysql = require('mysql'),
 
 let db = mysql.createConnection(config.database);
 
-db.connect((error) => {
+db.connect(error => {
     if (error) throw error;
 });
 
