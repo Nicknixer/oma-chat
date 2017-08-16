@@ -4,11 +4,10 @@ let express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    index = require('./routes/index'),
-    messages = require('./routes/messages'),
     db = require('./dependency/database.js'),
     session = require('express-session'),
     config = require('./config'),
+    requireFu = require('require-fu'),
     app = express();
 
 app.locals.db = db;
@@ -31,8 +30,7 @@ app.use(session({
   cookie: { secure: true }
 }));
 
-app.use('/', index);
-app.use('/messages', messages);
+requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
