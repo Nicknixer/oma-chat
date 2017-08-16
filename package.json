@@ -13,6 +13,7 @@
     "express": "~4.15.2",
     "express-session": "^1.15.5",
     "jade": "~1.11.0",
+    "mongoose": "^4.11.7",
     "morgan": "~1.8.1",
     "mysql": "^2.14.1",
     "mysql2": "^1.4.0",

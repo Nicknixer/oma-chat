@@ -3,7 +3,8 @@
 		"host": "localhost",
 		"user": "root",
 		"password": "",
-		"database": "oma-chat"
+		"database": "oma-chat",
+		"databaseUrl": "mongodb://localhost/oma-chat"
 	},
 	"session": {
 		"secret": "JsajjWLp23mdwewefewWEr3444"
