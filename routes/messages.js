@@ -1,6 +1,8 @@
+let Message = require('../models/Message');
+
 module.exports = function(app) {
     app.get('/messages', function (req, res, next) {
-        req.app.locals.db.query('SELECT name, message, date FROM messages', (error, rows, fields) => {
+        Message.find(function (error, messages) {
             if (error) {
                 res.json({
                     success: false,
@@ -10,7 +12,7 @@ module.exports = function(app) {
 
             res.json({
                 success: true,
-                messages: rows
+                messages: messages
             });
         });
     });
@@ -26,13 +28,13 @@ module.exports = function(app) {
             });
         }
 
-        let data = [
-            name,
-            message,
-            new Date().toISOString(),
-        ];
+        let userMessage = new Message({
+            name: name,
+            text: message,
+            date: new Date().toISOString()
+        });
 
-        req.app.locals.db.query('INSERT INTO messages (name, message, date) VALUES (?, ?, ?)', data, error => {
+        userMessage.save(function (error) {
             if (error) {
                 res.json({
                     success: false,

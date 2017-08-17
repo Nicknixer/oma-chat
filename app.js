@@ -1,6 +1,6 @@
 let express = require('express'),
     path = require('path'),
-    favicon = require('serve-favicon'),
+//    favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -10,6 +10,7 @@ let express = require('express'),
     app = express(),
     mongoose = require('mongoose');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.database.databaseUrl, {
     useMongoClient: true,
 });
@@ -24,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('trust proxy', 1)
+app.set('trust proxy', 1);
 app.use(session({
     secret: config.session.secret,
     resave: false,
@@ -36,13 +37,13 @@ requireFu(__dirname + '/routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
