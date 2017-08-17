@@ -4,7 +4,6 @@ let express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    dbMysql = require('./dependency/database.js'),
     session = require('express-session'),
     config = require('./config'),
     requireFu = require('require-fu'),
@@ -14,9 +13,6 @@ let express = require('express'),
 mongoose.connect(config.database.databaseUrl, {
     useMongoClient: true,
 });
-
-app.locals.em = mongoose;
-app.locals.db = dbMysql;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
