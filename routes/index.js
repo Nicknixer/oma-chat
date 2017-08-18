@@ -1,9 +1,9 @@
 module.exports = function(app) {
-    app.get('/', function (req, res, next) {
+    app.get('/', function (req, res) {
         res.render('index', {title: req.session.name});
     });
 
-    app.post('/auth', function (req, res, next) {
+    app.post('/auth', function (req, res) {
         let name = req.body.name;
         if (name.length !== 0) {
             req.session.name = name;

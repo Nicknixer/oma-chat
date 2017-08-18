@@ -1,7 +1,7 @@
 let Message = require('../models/Message');
 
 module.exports = function(app) {
-    app.get('/messages', function (req, res, next) {
+    app.get('/messages', function (req, res) {
         Message.find(function (error, messages) {
             if (error) {
                 res.json({
@@ -17,7 +17,7 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/messages', function (req, res, next) {
+    app.post('/messages', function (req, res) {
         let name = req.body.name;
         let message = req.body.message;
 
