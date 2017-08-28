@@ -12,13 +12,25 @@ class App extends Component {
   }
 
   addNote(message) {
-    let messages = this.state.messages;
-      messages.push(message);
-    console.log('messages:' + messages);
-    console.log('arr: ' + [{name:"num1", text:"text1"}]);
-    this.setState({
-        messages: messages
-    });
+      let data = {
+          name: message.name,
+          message: message.text
+      };
+      let dataFetch = {
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(data)
+      };
+
+      fetch('http://localhost:3001/messages', dataFetch)
+          .then(res=>res.json())
+          .then(res=>{
+                console.log(res.msg);
+          }).catch(e=>console.log(e));
+
       this.getMessages();
   }
 
