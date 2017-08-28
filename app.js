@@ -7,6 +7,7 @@ let express = require('express'),
     session = require('express-session'),
     config = require('./config'),
     requireFu = require('require-fu'),
+    cors = require('cors'),
     app = express(),
     mongoose = require('mongoose');
 
@@ -25,6 +26,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({
+    origin: '*',
+    optionsSuccessStatus: 200
+}));
 app.set('trust proxy', 1);
 app.use(session({
     secret: config.session.secret,
