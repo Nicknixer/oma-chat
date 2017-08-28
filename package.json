@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "front-start": "react-scripts start"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -16,6 +20,10 @@
     "morgan": "~1.8.1",
     "require-fu": "^1.0.0",
     "sequelize": "^4.4.2",
-    "serve-favicon": "~2.4.2"
-  }
+    "serve-favicon": "~2.4.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.10"
+  },
+  "proxy": "http://localhost:3001"
 }
