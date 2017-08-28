@@ -25,7 +25,7 @@ class App extends Component {
           body: JSON.stringify(data)
       };
 
-      fetch('http://localhost:3001/messages', dataFetch)
+      fetch('/messages', dataFetch)
           .then(res=>res.json())
           .then(res=>{
                 console.log(res.msg);
