@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import MessageInput from './MessageInput';
 import MessageList from './MessageList';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [{name:"num1", text:"text1"}, {name:"num2", text:"text2"}] };
+    this.state = { messages: [] };
     this.addNote = this.addNote.bind(this);
+    this.getMessages();
   }
 
   addNote(message) {
@@ -19,13 +19,26 @@ class App extends Component {
     this.setState({
         messages: messages
     });
+      this.getMessages();
+  }
+
+  getMessages() {
+      fetch('/messages')
+          .then(res=>res.json())
+          .then(res=>{
+            let messages = res.messages;
+            console.log(res);
+              this.setState({
+                  messages: messages
+              });
+          }).catch(e=>{console.log(e)});
   }
 
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Messages</h2>
+          <h2>oma-chat</h2>
         </div>
       <MessageList messages={this.state.messages} />
         <p className="App-intro">
